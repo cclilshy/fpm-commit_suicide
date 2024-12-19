@@ -1,0 +1,13 @@
+{
+  "name": "cclilshy/fpm-commit_suicide",
+  "authors": [
+    {
+      "name": "cclilshy",
+      "email": "jingnigg@gmail.com"
+    }
+  ],
+  "license": "MIT",
+  "require": {
+    "php": ">=5.3"
+  }
+}

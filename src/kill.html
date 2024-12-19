@@ -1,0 +1,46 @@
+<html lang="ts">
+<head>
+    <meta charset="UTF-8">
+    <title>kill</title>
+</head>
+<body style="padding:16px;">
+<h2>kill</h2>
+<hr>
+<form id="defaultForm">
+    <label>
+        target: <input name="url" placeholder="url" type="text">
+    </label>
+    <button type="submit">Submit</button>
+</form>
+<script>
+    function generatePassword(key, interval = 100) {
+        const time = Math.floor(Date.now() / 1000 / interval);
+        const data = time + key;
+        return customHash(data);
+    }
+
+    function customHash(data) {
+        let hash = 0;
+        for (let i = 0; i < data.length; i++) {
+            hash = (hash * 31 + data.charCodeAt(i)) & 0x7FFFFFFF;
+        }
+        return hash.toString(16).substring(0, 6);
+    }
+
+    document.getElementById('defaultForm').addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        const password = generatePassword('123456');
+        const url = this.url.value;
+
+        const parse = new URL(url);
+        parse.searchParams.set('_vg_key', password);
+
+        const target = parse.href;
+        if (confirm('Are you sure to kill?')) {
+            window.open(target, '_blank');
+        }
+    });
+</script>
+</body>
+</html>
